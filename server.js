@@ -1,9 +1,10 @@
+let contador = 0;
 const express = require('express');
 const bodyParser = require('body-parser')
-
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const books = [
     {
@@ -19,21 +20,23 @@ const books = [
 ];
 
 app.get('/books', (req, res) => {
+    contador++;
     res.send(books);
 });
 
 app.post('/books', (req, res) => {
+    contador++;
     const newBook = req.body;
     if (books.findIndex(b => b.ID === newBook.ID) !== -1) {
         res.status(500).send('Existing book ID');
         return;
     }
-
     books.push(newBook);
     res.send('Book added');
 });
 
 app.get('/books/:bookId', (req, res) => {
+    contador++;
     const bookId = parseInt(req.params.bookId);
     if (isNaN(bookId)) {
         res.status(500).send('Non integer');
@@ -45,8 +48,12 @@ app.get('/books/:bookId', (req, res) => {
         res.status(500).send('Invalid book ID');
         return;
     }
-
     res.send(book);
+});
+
+app.get('/log', (req, res) => {
+    contador++;
+    res.send("Numero de contador: "+contador);
 });
 
 app.listen(3000, () => {
