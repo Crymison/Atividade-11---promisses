@@ -37,3 +37,20 @@ axios.post('http://localhost:3000/books', {
     .then((response) => {
         console.log(response.data);
     });
+
+    axios.get('http://localhost:3000/books/1')
+    .then((response) => {
+        console.log(response.data);
+    });
+    axios.get('http://localhost:3000/books/3')
+    .then((response) => {
+        console.log(response.data);
+    });
+    axios.get('http://localhost:3000/books/2')
+    .then((response) => {
+        console.log(response.data);
+    });
+    axios.get('http://localhost:3000/books/4')
+    .then((response) => {
+        console.log(response.data);
+    });
